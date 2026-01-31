@@ -36,7 +36,6 @@ func _physics_process(delta:float) -> void:
 			apply_gravity(delta)	
 			
 			if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time >= 0):
-				animation_player.play("cass_jump")
 				jump()
 			
 			
@@ -56,7 +55,7 @@ func _physics_process(delta:float) -> void:
 				animation_player.play("cass_fall")
 			
 			
-			if Input.is_action_pressed("attack") and not is_on_floor():
+			if Input.is_action_just_pressed("attack") and not is_on_floor():
 				animation_player.play("cass_jumpattack")
 				
 				
