@@ -1,0 +1,9 @@
+# Godot generated files
+.godot/
+.import/
+*.import
+.export/
+
+# OS junk
+.DS_Store
+Thumbs.db
