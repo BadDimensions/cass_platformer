@@ -1,5 +1,91 @@
-[gd_scene format=3 uid="uid://b2aof6ymy6w83"]
+[gd_scene format=4 uid="uid://b2aof6ymy6w83"]
 
-[node name="world" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://bpkjago2tog37" path="res://sprite_sheets/tileset01.png" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://c4kb1l50d2qxn" path="res://cass.tscn" id="2_fj7yv"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
+texture = ExtResource("1_f3sb7")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:5/0 = 0
+3:6/0 = 0
+5:6/0 = 0
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:6/0 = 0
+7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:7/0 = 0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:7/0 = 0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:7/0 = 0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:7/0 = 0
+6:7/0 = 0
+6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:7/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tlwt5"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_fj7yv")
+
+[node name="world" type="Node2D" unique_id=14598685]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1682166673]
+z_index = 1
+tile_map_data = PackedByteArray("AAAJAAgAAAAGAAEAAAAIAAgAAAAGAAEAAAAHAAgAAAAGAAEAAAAGAAgAAAAGAAEAAAAFAAgAAAAGAAEAAAAEAAgAAAAGAAEAAAADAAgAAAAGAAEAAAACAAgAAAAGAAEAAAABAAgAAAAGAAEAAAAAAAgAAAAGAAEAAAAKAAgAAAAGAAEAAAALAAgAAAAGAAEAAAAMAAgAAAAGAAEAAAANAAgAAAAGAAEAAAAOAAgAAAAGAAEAAAAPAAgAAAAGAAEAAAAQAAgAAAAGAAEAAAARAAgAAAAGAAEAAAASAAgAAAAGAAEAAAATAAgAAAAGAAEAAAAAAAkAAAAGAAIAAAABAAkAAAAGAAIAAAACAAkAAAAGAAIAAAADAAkAAAAGAAIAAAAEAAkAAAAGAAIAAAAFAAkAAAAGAAIAAAAGAAkAAAAGAAIAAAAHAAkAAAAGAAIAAAAIAAkAAAAGAAIAAAAJAAkAAAAGAAIAAAAKAAkAAAAGAAIAAAALAAkAAAAGAAIAAAAMAAkAAAAGAAIAAAANAAkAAAAGAAIAAAAOAAkAAAAGAAIAAAAPAAkAAAAGAAIAAAAQAAkAAAAGAAIAAAARAAkAAAAGAAIAAAASAAkAAAAGAAIAAAATAAkAAAAGAAIAAAATAAoAAAAGAAIAAAASAAoAAAAGAAIAAAARAAoAAAAGAAIAAAAQAAoAAAAGAAIAAAAPAAoAAAAGAAIAAAAOAAoAAAAGAAIAAAANAAoAAAAGAAIAAAAMAAoAAAAGAAIAAAALAAoAAAAGAAIAAAAKAAoAAAAGAAIAAAAJAAoAAAAGAAIAAAAIAAoAAAAGAAIAAAAHAAoAAAAGAAIAAAAGAAoAAAAGAAIAAAAFAAoAAAAGAAIAAAAEAAoAAAAGAAIAAAADAAoAAAAGAAIAAAACAAoAAAAGAAIAAAABAAoAAAAGAAIAAAAAAAoAAAAGAAIAAAA=")
+tile_set = SubResource("TileSet_tlwt5")
+metadata/_edit_lock_ = true
+
+[node name="cass" parent="." unique_id=849479898 instance=ExtResource("2_fj7yv")]
+position = Vector2(146, 112)
