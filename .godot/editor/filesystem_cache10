@@ -1,0 +1,15 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1769831238
+cass.tscn::PackedScene::6829069383305991939::1769827625::0::1::::<><><>0<>0<><>::
+icon.svg::CompressedTexture2D::8062841743766772337::1769826415::1769831239::1::::<><><>0<>0<>0515df4ff8526f42126179bc9ebca612<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+world.tscn::PackedScene::4282380094665933006::1769827680::0::1::::<><><>0<>0<><>::
+::res://sprite_sheets/::1769829210
+background.png::CompressedTexture2D::6563642629659554193::1769829150::1769831239::1::::<><><>0<>0<>1a0c40f555aca35150bacd800cd06703<>res://.godot/imported/background.png-5f7da07851850097c9a1284d2e8627fe.ctex::
+barrel-boss.png::CompressedTexture2D::8927853387160313607::1769829150::1769831239::1::::<><><>0<>0<>840ae300d2fe3d967c777a41a9ad3149<>res://.godot/imported/barrel-boss.png-c849307112b88a95ea16404aa958aa05.ctex::
+barrel-enemy01.png::CompressedTexture2D::8453688539749872175::1769829150::1769831239::1::::<><><>0<>0<>b1eb0c63286733dd7570cf1b9a194e75<>res://.godot/imported/barrel-enemy01.png-359875258b324a6cf99e0f7e0a27c121.ctex::
+barrel-enemy02.png::CompressedTexture2D::7916631064988855662::1769829150::1769831239::1::::<><><>0<>0<>89c16f1defa60ce5e65a79f2c6fae8db<>res://.godot/imported/barrel-enemy02.png-773a2f891c3bea0d159c89b0c713caa7.ctex::
+bird-enemy01.png::CompressedTexture2D::5932945799203149479::1769829150::1769831239::1::::<><><>0<>0<>122220d2e5dd6968a9bcc7749d2bbf12<>res://.godot/imported/bird-enemy01.png-de07dd3ef729ef1ee1632f09a7561370.ctex::
+cass_03.png::CompressedTexture2D::2668025606871686331::1769829150::1769831239::1::::<><><>0<>0<>0dd49877eb965898b71e60296502d6a9<>res://.godot/imported/cass_03.png-777535f48bf4b2c9e15b22722aa7e059.ctex::
+health.png::CompressedTexture2D::4737962823757974484::1769829150::1769831239::1::::<><><>0<>0<>20ca6e2059f1fcb37d3ae869deeb4c28<>res://.godot/imported/health.png-01cf50f244878403a1ca7d354598e7b2.ctex::
+stone.png::CompressedTexture2D::6901112978861856951::1769829150::1769831239::1::::<><><>0<>0<>e80a4158ccb106649b4bb47506663372<>res://.godot/imported/stone.png-3f8ec21f55daef23abed759e39f25d37.ctex::
+tileset01.png::CompressedTexture2D::3792161370257438402::1769829150::1769831239::1::::<><><>0<>0<>0cbe5f07cd5deef528c42566c2124138<>res://.godot/imported/tileset01.png-66ad317926219c183cf7dc63a19ce68f.ctex::
