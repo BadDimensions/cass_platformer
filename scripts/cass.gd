@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum STATE { MOVE, JUMP, WALLJUMP }
+enum STATE { MOVE }
 
 @export var state: = STATE.MOVE
 
@@ -8,8 +8,13 @@ enum STATE { MOVE, JUMP, WALLJUMP }
 @onready var anchor: Node2D = $anchor
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+const wall_jump_pushback = 100
+const wall_slide_gravity = 100
 
+
+var is_wall_sliding = false
 var coyote_time = 0
+var wall_normal = get_wall_normal()
 
 
 @export var max_speed = 50
@@ -40,10 +45,15 @@ func _physics_process(delta:float) -> void:
 			var x_input = Input.get_axis("move_left", "move_right")
 
 			apply_gravity(delta)
-
+			wall_slide(delta)
+		
+			
 			if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time >= 0):
 				jump()
-
+			if Input.is_action_just_pressed("jump") and is_on_wall():
+				jump()
+			if Input.is_action_just_pressed("move_up"): jump()
+			
 			if x_input == 0:
 				apply_friction(delta)
 			else:
@@ -57,7 +67,9 @@ func _physics_process(delta:float) -> void:
 				animation_player.play("cass_attack")
 			# Only play movement animations if NOT currently playing an attack animation
 			elif animation_player.current_animation not in ["cass_attack", "cass_jumpattack"]:
-				if not is_on_floor() and velocity.y <= 0:
+				if is_on_wall() and not is_on_floor():
+					animation_player.play("cass_walltouch")
+				elif not is_on_floor() and velocity.y <= 0:
 					animation_player.play("cass_jump")
 				elif not is_on_floor() and velocity.y >= 0:
 					if animation_player.current_animation != "cass_fall":
@@ -74,18 +86,29 @@ func _physics_process(delta:float) -> void:
 				coyote_time = 0.1
 
 
-			#if should_wall_jump():
-				#state = STATE.WALLJUMP
-
-
-		STATE.JUMP:
-			pass
-		STATE.WALLJUMP:
-			pass
-
 
 func jump() -> void:
-	velocity.y = -jump_amount
+		if is_on_floor() or is_on_wall():
+			velocity.y = -jump_amount
+		if is_on_wall() and Input.is_action_pressed("move_right"):
+			velocity.y = -jump_amount
+			velocity.x = -wall_jump_pushback
+		if is_on_wall() and Input.is_action_pressed("move_left"):
+			velocity.y = -jump_amount
+			velocity.x = wall_jump_pushback
+
+func wall_slide(delta):
+	if is_on_wall_only() and not Input.is_action_pressed("jump"):
+		if Input.get_axis("move_left", "move_right"):
+			is_wall_sliding = true
+		else:
+			is_wall_sliding = false
+	else:
+		is_wall_sliding = false
+	
+	if is_wall_sliding:
+		velocity.y += (wall_slide_gravity * delta)
+		velocity.y = min(velocity.y, wall_slide_gravity)
 
 func accelerate_horizontally(horizontal_direction: float, delta: float) -> void:
 	var acceleration_amount = acceleration
@@ -103,6 +126,3 @@ func apply_gravity(delta) -> void:
 			velocity.y += up_gravity * delta
 		else:
 			velocity.y += down_gravity * delta
-
-#func should_wall_jump() -> bool:
-	#return is_on_wall_only()
