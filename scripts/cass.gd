@@ -46,25 +46,28 @@ func _physics_process(delta:float) -> void:
 
 			if x_input == 0:
 				apply_friction(delta)
-				animation_player.play("cass_idle")
 			else:
 				accelerate_horizontally(x_input, delta)
 				anchor.scale.x = sign(x_input)
-				animation_player.play("cass_run")
 
-
-			if not is_on_floor() and velocity.y <= 0:
-				animation_player.play("cass_jump")
-			if not is_on_floor() and velocity.y >= 0:
-				animation_player.play("cass_fall")
-
-
+			# Check for attack first
 			if Input.is_action_just_pressed("attack") and not is_on_floor():
 				animation_player.play("cass_jumpattack")
-
-			if Input.is_action_just_pressed("attack")and is_on_floor():
+			elif Input.is_action_just_pressed("attack") and is_on_floor():
 				animation_player.play("cass_attack")
+			# Only play movement animations if NOT currently playing an attack animation
+			elif animation_player.current_animation not in ["cass_attack", "cass_jumpattack"]:
+				if not is_on_floor() and velocity.y <= 0:
+					animation_player.play("cass_jump")
+				elif not is_on_floor() and velocity.y >= 0:
+					if animation_player.current_animation != "cass_fall":
+						animation_player.play("cass_fall")
+				elif x_input != 0:
+					animation_player.play("cass_run")
+				else:
+					animation_player.play("cass_idle")
 
+#
 			var was_on_floor: = is_on_floor()
 			move_and_slide()
 			if was_on_floor and not is_on_floor() and velocity.y >= 0:
