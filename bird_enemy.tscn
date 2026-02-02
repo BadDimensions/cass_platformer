@@ -17,18 +17,6 @@ metadata/_custom_type_script = "uid://77ruu5yxqkrw"
 radius = 19.0
 height = 56.0
 
-[sub_resource type="Animation" id="Animation_7phma"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_0grp7"]
-resource_name = "hit_flash"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_syc6c"]
-_data = {
-&"RESET": SubResource("Animation_7phma"),
-&"hit_flash": SubResource("Animation_0grp7")
-}
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_og5wd"]
 radius = 19.0
 height = 56.0
@@ -62,6 +50,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9, 6]
+}
+
+[sub_resource type="Animation" id="Animation_syc6c"]
+resource_name = "death"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_qu1vt"]
@@ -118,6 +122,7 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_q8blk"),
 &"attack": SubResource("Animation_hkuvh"),
+&"death": SubResource("Animation_syc6c"),
 &"hit": SubResource("Animation_qu1vt"),
 &"idle": SubResource("Animation_h40ig"),
 &"walk": SubResource("Animation_je0vq")
@@ -143,9 +148,6 @@ script = ExtResource("4_qu1vt")
 shape = SubResource("CapsuleShape2D_p8cbu")
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="anchor" unique_id=1732080059]
-libraries/ = SubResource("AnimationLibrary_syc6c")
-
 [node name="Hitbox" type="Area2D" parent="anchor" unique_id=1081641859]
 collision_layer = 0
 collision_mask = 8
@@ -157,3 +159,10 @@ shape = SubResource("CapsuleShape2D_og5wd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1471293196]
 libraries/ = SubResource("AnimationLibrary_7phma")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=587284938]
+position = Vector2(-30, -4)
+
+[node name="Timer" type="Timer" parent="." unique_id=2064485129]
+wait_time = 5.0
+autostart = true

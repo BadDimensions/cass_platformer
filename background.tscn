@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bffp3y2vd3m0"]
+
+[ext_resource type="Texture2D" uid="uid://bqjadegaqfl7v" path="res://sprite_sheets/background.png" id="1_oabld"]
+
+[node name="background" type="Node2D" unique_id=849964934]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1842911132]
+texture_filter = 1
+layout_direction = 2
+offset_left = -320.0
+offset_right = 1000.0
+offset_bottom = 180.0
+texture = ExtResource("1_oabld")
+expand_mode = 1
+stretch_mode = 1

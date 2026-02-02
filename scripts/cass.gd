@@ -9,7 +9,6 @@ enum STATE { MOVE, HIT }
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
 @onready var anchor: Node2D = $anchor
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var effects_animation_player: AnimationPlayer = $EffectsAnimationPlayer
 @onready var shaker: = Shaker.new(anchor)
 @onready var camera_2d: Camera2D = $Camera2D
 
@@ -32,13 +31,14 @@ var wall_normal = get_wall_normal()
 @export var jump_amount = 700
 
 func _ready() -> void:
-	#sprite_2d.material.set_shader_parameter("flash_color", Color("ff4d4d"))
 	stats.no_health.connect(queue_free)
+	animation_player.play("cass_death")
+	
 	#camera_2d.reparent(get_tree().current_scene)
 
 	# Return to MOVE state when hit animation finishes
-	effects_animation_player.animation_finished.connect(func(anim_name):
-		if anim_name == "hit_flash" and state == STATE.HIT:
+	animation_player.animation_finished.connect(func(anim_name):
+		if anim_name == "cass_hit" and state == STATE.HIT:
 			state = STATE.MOVE
 	)
 
@@ -47,10 +47,9 @@ func _ready() -> void:
 		if x_direction == 0 : x_direction = -1
 		velocity.x = x_direction * max_speed
 		state = STATE.HIT
-		animation_player.play("cass_jump")
+		animation_player.play("cass_hit")
 		#jump(jump_amount/2)
 		shaker.shake(3,0.3)
-		effects_animation_player.play("hit_flash")
 		stats.health -= other_hitbox.damage
 	)
 
