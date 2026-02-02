@@ -35,7 +35,13 @@ func _ready() -> void:
 	#sprite_2d.material.set_shader_parameter("flash_color", Color("ff4d4d"))
 	stats.no_health.connect(queue_free)
 	#camera_2d.reparent(get_tree().current_scene)
-	
+
+	# Return to MOVE state when hit animation finishes
+	effects_animation_player.animation_finished.connect(func(anim_name):
+		if anim_name == "hit_flash" and state == STATE.HIT:
+			state = STATE.MOVE
+	)
+
 	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
 		var x_direction = sign(other_hitbox.global_position.direction_to(global_position).x)
 		if x_direction == 0 : x_direction = -1
@@ -44,10 +50,10 @@ func _ready() -> void:
 		animation_player.play("cass_jump")
 		#jump(jump_amount/2)
 		shaker.shake(3,0.3)
-		effects_animation_player.play("hit_flash")	
-		stats.health -= other_hitbox.damage	
+		effects_animation_player.play("hit_flash")
+		stats.health -= other_hitbox.damage
 	)
-		
+
 func _physics_process(delta:float) -> void:
 	match state:
 		STATE.MOVE:
@@ -57,14 +63,14 @@ func _physics_process(delta:float) -> void:
 
 			apply_gravity(delta)
 			wall_slide(delta)
-		
-			
+
+
 			if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time >= 0):
 				jump()
 			if Input.is_action_just_pressed("jump") and is_on_wall():
 				jump()
 			if Input.is_action_just_pressed("move_up"): jump()
-			
+
 			if x_input == 0:
 				apply_friction(delta)
 			else:
@@ -100,7 +106,7 @@ func _physics_process(delta:float) -> void:
 			move_and_slide()
 			apply_friction(delta)
 			apply_gravity(delta)
-			
+
 
 func jump() -> void:
 		if is_on_floor() or is_on_wall():
@@ -120,7 +126,7 @@ func wall_slide(delta):
 			is_wall_sliding = false
 	else:
 		is_wall_sliding = false
-	
+
 	if is_wall_sliding:
 		velocity.y += (wall_slide_gravity * delta)
 		velocity.y = min(velocity.y, wall_slide_gravity)
