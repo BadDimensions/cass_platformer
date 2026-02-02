@@ -2,15 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cnyjkwbf40ukv" path="res://scripts/cass.gd" id="1_ji1ou"]
 [ext_resource type="Texture2D" uid="uid://fuf50xw81mmn" path="res://sprite_sheets/cass_03.png" id="1_tbdlw"]
-[ext_resource type="Script" uid="uid://77ruu5yxqkrw" path="res://scripts/stats.gd" id="2_f3k1y"]
 [ext_resource type="Script" uid="uid://bpmny8xk3jl8h" path="res://scripts/hitbox.gd" id="3_8mi56"]
 [ext_resource type="Script" uid="uid://dgwxyhap62u6g" path="res://scripts/hurtbox.gd" id="4_jq8yw"]
 [ext_resource type="Material" uid="uid://dss4tcio6qlad" path="res://effects_material.tres" id="5_jq8yw"]
-
-[sub_resource type="Resource" id="Resource_nd1go"]
-script = ExtResource("2_f3k1y")
-health = 3
-metadata/_custom_type_script = "uid://77ruu5yxqkrw"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ji1ou"]
 radius = 8.0
@@ -34,20 +28,20 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:disabled")
+tracks/1/enabled = false
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [SubResource("CircleShape2D_ji1ou")]
 }
 
 [sub_resource type="Animation" id="Animation_f3k1y"]
 resource_name = "cass_attack"
-length = 0.3
+length = 0.6
 step = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -56,22 +50,22 @@ tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [16, 17, 17, 18]
+"values": [16, 17, 17, 17, 18]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.10000001, 0.20000002, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, false, true]
+"values": [SubResource("CircleShape2D_ji1ou")]
 }
 
 [sub_resource type="Animation" id="Animation_454yo"]
@@ -173,18 +167,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [10, 19, 19, 19, 10]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.10000001, 0.20000002, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, false, false, true]
-}
 
 [sub_resource type="Animation" id="Animation_8mi56"]
 resource_name = "cass_run"
@@ -278,18 +260,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [null]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:state")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_v08dd"]
 resource_name = "hit_flash"
@@ -327,9 +297,15 @@ _data = {
 
 [node name="cass" type="CharacterBody2D" unique_id=849479898]
 z_index = 50
-collision_layer = 2
 script = ExtResource("1_ji1ou")
-stats = SubResource("Resource_nd1go")
+state = null
+max_speed = null
+acceleration = null
+air_acceleration = null
+friction = null
+air_friction = null
+up_gravity = null
+down_gravity = null
 jump_amount = 300
 
 [node name="anchor" type="Node2D" parent="." unique_id=2107029233]
@@ -342,14 +318,11 @@ hframes = 23
 frame = 20
 
 [node name="Hitbox" type="Area2D" parent="anchor" unique_id=228859170]
-collision_layer = 0
-collision_mask = 16
 script = ExtResource("3_8mi56")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="anchor/Hitbox" unique_id=1308185561]
 position = Vector2(16, -24)
 shape = SubResource("CircleShape2D_ji1ou")
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2057972306]
 position = Vector2(2, -19)
@@ -362,8 +335,6 @@ autoplay = &"RESET"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=993296640]
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=841066176]
-collision_layer = 8
-collision_mask = 0
 script = ExtResource("4_jq8yw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1386653267]

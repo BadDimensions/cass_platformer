@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bwrslxxlu3p3u"]
+
+[ext_resource type="Script" uid="uid://crnnxh4041y0o" path="res://scripts/rock.gd" id="1_68h2w"]
+[ext_resource type="Texture2D" uid="uid://d3ebgkomqqxlm" path="res://sprite_sheets/stone.png" id="1_o0qsl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68h2w"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_o0qsl")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_68h2w"]
+radius = 4.0
+
+[node name="Rock" type="Node2D" unique_id=1149318674]
+script = ExtResource("1_68h2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=301290751]
+sprite_frames = SubResource("SpriteFrames_68h2w")
+animation = &"new_animation"
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1543816187]
+collision_layer = 0
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1653431641]
+shape = SubResource("CircleShape2D_68h2w")

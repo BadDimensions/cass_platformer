@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
-enum STATE { MOVE }
+enum STATE { MOVE, HIT }
 
 @export var state: = STATE.MOVE
+
+@onready var hurtbox: Hurtbox = $Hurtbox
 
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
 @onready var anchor: Node2D = $anchor
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var effects_animation_player: AnimationPlayer = $EffectsAnimationPlayer
+@onready var shaker: = Shaker.new(anchor)
+@onready var camera_2d: Camera2D = $Camera2D
 
 const wall_jump_pushback = 100
 const wall_slide_gravity = 100
@@ -16,7 +21,7 @@ var is_wall_sliding = false
 var coyote_time = 0
 var wall_normal = get_wall_normal()
 
-
+@export var stats: Stats
 @export var max_speed = 50
 @export var acceleration = 100
 @export var air_acceleration = 200
@@ -27,16 +32,22 @@ var wall_normal = get_wall_normal()
 @export var jump_amount = 700
 
 func _ready() -> void:
-	# adding this caused issues with animation not playing properly
-	# it seems to conflict with the animation_player.play() calls in _physics_process
-
-	# 	animation_player.current_animation_changed.connect(func(animation_name: String):
-	# 		animation_player.play(animation_name)
-	# )
-	#
-	# passing through for now
-	pass
-
+	#sprite_2d.material.set_shader_parameter("flash_color", Color("ff4d4d"))
+	stats.no_health.connect(queue_free)
+	#camera_2d.reparent(get_tree().current_scene)
+	
+	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
+		var x_direction = sign(other_hitbox.global_position.direction_to(global_position).x)
+		if x_direction == 0 : x_direction = -1
+		velocity.x = x_direction * max_speed
+		state = STATE.HIT
+		animation_player.play("cass_jump")
+		#jump(jump_amount/2)
+		shaker.shake(3,0.3)
+		effects_animation_player.play("hit_flash")	
+		stats.health -= other_hitbox.damage	
+	)
+		
 func _physics_process(delta:float) -> void:
 	match state:
 		STATE.MOVE:
@@ -85,7 +96,11 @@ func _physics_process(delta:float) -> void:
 			if was_on_floor and not is_on_floor() and velocity.y >= 0:
 				coyote_time = 0.1
 
-
+		STATE.HIT:
+			move_and_slide()
+			apply_friction(delta)
+			apply_gravity(delta)
+			
 
 func jump() -> void:
 		if is_on_floor() or is_on_wall():

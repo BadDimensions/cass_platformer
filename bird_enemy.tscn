@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://wiwh72pl8p5e"]
+
+[ext_resource type="Script" uid="uid://clsns4vav6ixy" path="res://bird_enemy.gd" id="1_og5wd"]
+[ext_resource type="Texture2D" uid="uid://48kl5do3ieft" path="res://sprite_sheets/bird-enemy01.png" id="1_p8cbu"]
+[ext_resource type="Script" uid="uid://77ruu5yxqkrw" path="res://scripts/stats.gd" id="2_q8blk"]
+[ext_resource type="Script" uid="uid://dgwxyhap62u6g" path="res://scripts/hurtbox.gd" id="4_qu1vt"]
+[ext_resource type="Script" uid="uid://bpmny8xk3jl8h" path="res://scripts/hitbox.gd" id="5_h40ig"]
+
+[sub_resource type="Resource" id="Resource_hkuvh"]
+script = ExtResource("2_q8blk")
+health = 3
+metadata/_custom_type_script = "uid://77ruu5yxqkrw"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q8blk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8cbu"]
+radius = 19.0
+height = 56.0
+
+[sub_resource type="Animation" id="Animation_7phma"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_0grp7"]
+resource_name = "hit_flash"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_syc6c"]
+_data = {
+&"RESET": SubResource("Animation_7phma"),
+&"hit_flash": SubResource("Animation_0grp7")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_og5wd"]
+radius = 19.0
+height = 56.0
+
+[sub_resource type="Animation" id="Animation_q8blk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hkuvh"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 6]
+}
+
+[sub_resource type="Animation" id="Animation_qu1vt"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_h40ig"]
+resource_name = "idle"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_je0vq"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.23333333, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7phma"]
+_data = {
+&"RESET": SubResource("Animation_q8blk"),
+&"attack": SubResource("Animation_hkuvh"),
+&"hit": SubResource("Animation_qu1vt"),
+&"idle": SubResource("Animation_h40ig"),
+&"walk": SubResource("Animation_je0vq")
+}
+
+[node name="bird_enemy" type="Node2D" unique_id=613345168]
+script = ExtResource("1_og5wd")
+stats = SubResource("Resource_hkuvh")
+
+[node name="anchor" type="Node2D" parent="." unique_id=1986882619]
+
+[node name="Sprite2D" type="Sprite2D" parent="anchor" unique_id=1892708055]
+material = SubResource("ShaderMaterial_q8blk")
+texture = ExtResource("1_p8cbu")
+hframes = 11
+
+[node name="Hurtbox" type="Area2D" parent="anchor" unique_id=1643667034]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("4_qu1vt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor/Hurtbox" unique_id=1284085761]
+shape = SubResource("CapsuleShape2D_p8cbu")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="anchor" unique_id=1732080059]
+libraries/ = SubResource("AnimationLibrary_syc6c")
+
+[node name="Hitbox" type="Area2D" parent="anchor" unique_id=1081641859]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("5_h40ig")
+metadata/_custom_type_script = "uid://bpmny8xk3jl8h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor/Hitbox" unique_id=1593624807]
+shape = SubResource("CapsuleShape2D_og5wd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1471293196]
+libraries/ = SubResource("AnimationLibrary_7phma")
