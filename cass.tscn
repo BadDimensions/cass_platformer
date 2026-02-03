@@ -80,7 +80,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_454yo"]
 resource_name = "cass_death"
-length = 0.4
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,10 +88,10 @@ tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [21, 22, 22]
+"values": [21, 21, 22, 22]
 }
 
 [sub_resource type="Animation" id="Animation_jq8yw"]
@@ -297,4 +297,5 @@ libraries/ = SubResource("AnimationLibrary_jq8yw")
 autoplay = &"RESET"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=993296640]
+limit_top = -160
 script = ExtResource("5_f3k1y")

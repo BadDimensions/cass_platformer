@@ -20,9 +20,9 @@ var coyote_time = 0
 var wall_normal = get_wall_normal()
 
 @export var stats: Stats
-@export var max_speed = 50
-@export var acceleration = 100
-@export var air_acceleration = 200
+@export var max_speed = 100
+@export var acceleration = 200
+@export var air_acceleration = 300
 @export var friction = 10000
 @export var air_friction = 500
 @export var up_gravity = 500
