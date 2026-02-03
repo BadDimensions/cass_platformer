@@ -19,21 +19,32 @@ func _ready() -> void:
 		if anim_name == "hit":
 			animation_player.play("RESET")
 	)
-	
+
 	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
-		stats.health -= other_hitbox.damage
-		animation_player.play("hit")
+		var newHealth = stats.health - other_hitbox.damage
+
+		if newHealth <= 0:
+			animation_player.play("death")
+			await animation_player.animation_finished
+			stats.health = newHealth
+		else:
+			animation_player.play("hit")
+			await animation_player.animation_finished
+			stats.health = newHealth
+
+		shaker.shake(5, 0.2)
+
 		#effects_animation_player.play("hit_flash")
-		shaker.shake(2.0, 0.2)
-	)	
-	
+
+	)
+
 	stats.no_health.connect(queue_free)
-		
-	
+
+
 	timer.timeout.connect(fire)
 
 func physics_process() -> void:
-	pass	
+	pass
 
 
 func fire() -> void:

@@ -32,8 +32,7 @@ var wall_normal = get_wall_normal()
 
 func _ready() -> void:
 	stats.no_health.connect(queue_free)
-	animation_player.play("cass_death")
-	
+
 	#camera_2d.reparent(get_tree().current_scene)
 
 	# Return to MOVE state when hit animation finishes
@@ -47,10 +46,21 @@ func _ready() -> void:
 		if x_direction == 0 : x_direction = -1
 		velocity.x = x_direction * max_speed
 		state = STATE.HIT
-		animation_player.play("cass_hit")
+
+		# calcuate the new health before applying it to the state
+		# play the correct animation based on if dead or not
+		var newHealth = stats.health - other_hitbox.damage
+		if newHealth <= 0:
+			animation_player.play("cass_death")
+			await animation_player.animation_finished
+			stats.health = newHealth
+		else:
+			animation_player.play("cass_hit")
+			await animation_player.animation_finished
+			stats.health = newHealth
+
 		#jump(jump_amount/2)
-		shaker.shake(3,0.3)
-		stats.health -= other_hitbox.damage
+		shaker.shake(10,0.3)
 	)
 
 func _physics_process(delta:float) -> void:
