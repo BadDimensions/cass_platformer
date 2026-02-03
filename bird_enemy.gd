@@ -15,17 +15,26 @@ const ROCK_SCENE = preload("res://rock.tscn")
 		stats = stats.duplicate()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	animation_player.animation_finished.connect(func(anim_name):
 		if anim_name == "hit":
 			animation_player.play("RESET")
 	)
 	
 	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
-		stats.health -= other_hitbox.damage
-		animation_player.play("hit")
-		#effects_animation_player.play("hit_flash")
-		shaker.shake(2.0, 0.2)
-	)	
+		var newHealth = stats.health - other_hitbox.damage
+	
+		if newHealth <= 0:
+			animation_player.play("death")
+			await animation_player.animation_finished
+			stats.health = newHealth
+		else:
+			animation_player.play("hit")
+			await animation_player.animation_finished
+			stats.health = newHealth
+			shaker.shake(5, 0.2)
+	)
+
 	
 	stats.no_health.connect(queue_free)
 		
