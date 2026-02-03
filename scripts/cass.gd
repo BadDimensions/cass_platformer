@@ -4,8 +4,7 @@ enum STATE { MOVE, HIT }
 
 @export var state: = STATE.MOVE
 
-@onready var hurtbox: Hurtbox = $Hurtbox
-
+@onready var hurtbox: Hurtbox = $anchor/Hurtbox
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
 @onready var anchor: Node2D = $anchor
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

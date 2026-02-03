@@ -15,6 +15,10 @@ metadata/_custom_type_script = "uid://77ruu5yxqkrw"
 [sub_resource type="CircleShape2D" id="CircleShape2D_ji1ou"]
 radius = 8.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3k1y"]
+radius = 11.0
+height = 36.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ji1ou"]
 size = Vector2(18, 37)
 
@@ -250,8 +254,6 @@ _data = {
 &"cass_walltouch": SubResource("Animation_nm70d")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_aseie"]
-
 [node name="cass" type="CharacterBody2D" unique_id=849479898]
 z_index = 50
 collision_layer = 2
@@ -277,6 +279,15 @@ position = Vector2(16, -24)
 shape = SubResource("CircleShape2D_ji1ou")
 disabled = true
 
+[node name="Hurtbox" type="Area2D" parent="anchor" unique_id=841066176]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_jq8yw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor/Hurtbox" unique_id=1386653267]
+position = Vector2(2, -18)
+shape = SubResource("CapsuleShape2D_f3k1y")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2057972306]
 position = Vector2(2, -19)
 shape = SubResource("RectangleShape2D_ji1ou")
@@ -287,11 +298,3 @@ autoplay = &"RESET"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=993296640]
 script = ExtResource("5_f3k1y")
-
-[node name="Hurtbox" type="Area2D" parent="." unique_id=841066176]
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("4_jq8yw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1386653267]
-shape = SubResource("CircleShape2D_aseie")
