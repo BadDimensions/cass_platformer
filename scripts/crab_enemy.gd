@@ -4,7 +4,7 @@ enum STATE { IDLE, WALK }
 const speed = 100
 
 
-@export var current_state: = STATE.IDLE
+@export var state: = STATE.IDLE
 
 @onready var anchor: Node2D = $anchor
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
@@ -32,13 +32,13 @@ func _ready() -> void:
 	)	
 	
 func _physics_process(delta:float) -> void:
-	match current_state:
+	match state:
 		STATE.IDLE:
 			pass
 
 func change_state(new_state: STATE) -> void:
-	current_state = new_state
-	match current_state:
+	state = new_state
+	match state:
 		STATE.IDLE:
 			#animation_player.play("crab_idle")
 			timer.wait_time = 5.0
@@ -49,7 +49,7 @@ func change_state(new_state: STATE) -> void:
 			timer.start()
 			
 func _on_timer_timeout():
-	match current_state:
+	match state:
 		STATE.IDLE:
 			change_state(STATE.WALK)
 			#animation_player.play("crab_walk")

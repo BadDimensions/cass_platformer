@@ -67,7 +67,7 @@ tracks/0/path = NodePath("Node2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.020465264, 0.04, 0.06035519, 0.08030015, 0.100418545),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9, 10, 6]
@@ -79,10 +79,10 @@ tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.019780844, 0.02184287, 0.03956169, 0.03986324, 0.05991095, 0.060978018, 0.07936243, 0.08071494, 0.099931136, 0.100723155, 0.10338959),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.20177522, 0.39778543, 0.60647863, 0.7921119, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(8, -40), Vector2(24, -40), Vector2(8, -32), Vector2(24, -40), Vector2(8, -32), Vector2(24, -40), Vector2(8, -32), Vector2(8, -32), Vector2(24, -40), Vector2(8, -32), Vector2(24, -40), Vector2(16, -40)]
+"values": [Vector2(8, -40), Vector2(9.614201, -40), Vector2(11.1822815, -40), Vector2(12.851828, -40), Vector2(14.336895, -40), Vector2(16, -40)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -91,7 +91,7 @@ tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.020143554, 0.03979096, 0.06043066, 0.08027653, 0.10027723),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(32, -40), Vector2(32, -40), Vector2(32, -40), Vector2(32, -40), Vector2(32, -40), Vector2(32, -40)]
@@ -180,6 +180,8 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_e6xn4"]
 resource_name = "boss_idle"
 length = 0.2
+loop_mode = 2
+step = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -303,5 +305,11 @@ debug_color = Color(0.9764706, 0, 0, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1070190197]
 libraries/ = SubResource("AnimationLibrary_d4uxw")
+speed_scale = 0.2
 
-[node name="Timer" type="Timer" parent="." unique_id=381022025]
+[node name="idle_timer" type="Timer" parent="." unique_id=381022025]
+wait_time = 20.0
+autostart = true
+
+[node name="attack_timer" type="Timer" parent="." unique_id=1288070272]
+wait_time = 30.0

@@ -1,21 +1,32 @@
 extends Node
 
 enum STATE { IDLE, ROAR, CHARGE }
-const speed = 100
 
-var state = STATE.IDLE# Called when the node enters the scene tree for the first time.
+@export var state: = STATE.IDLE
+
+const speed = 100
+var velocity = 50
+var direction: Vector2:
+	set(value):
+		direction = value.normalized()
 
 @onready var sprite_2d: Sprite2D = $Node2D/Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var timer: Timer = $Timer
+
 @onready var shaker: = Shaker.new(sprite_2d)
 @onready var hurtbox: Hurtbox = $Node2D/Hurtbox
+@onready var idle_timer: Timer = $idle_timer
+@onready var attack_timer: Timer = $attack_timer
+@export var friction = 10000
+@export var stats: Stats:
+	set(value):
+		if value is not Stats: return
+		stats = value
+		stats = stats.duplicate()
 
-@export var stats: Stats
-
+@export var is_invincible: = false
 
 func _ready() -> void:
-	pass # Replace with function body.
 	animation_player.animation_finished.connect(func(anim_name):
 		if anim_name == "boss_hit":
 			animation_player.play("RESET")
@@ -35,7 +46,19 @@ func _ready() -> void:
 	)
 
 	stats.no_health.connect(queue_free)
-		
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+func _physics_process(delta: float) -> void:
+	match state:
+		STATE.IDLE:
+			animation_player.play("boss_idle")
+			idle_timer.start
+			attack_timer.start
+	if idle_timer.time_left == 0 and attack_timer.time_left >0:
+			state = STATE.ROAR
+			animation_player.play("boss_roar")
+			is_invincible = true
+	if idle_timer.time_left == 0 and attack_timer.time_left == 0:
+			state = STATE.CHARGE
+			animation_player.play("boss_charge")
+			attack_timer.start
+	print(state, STATE)
