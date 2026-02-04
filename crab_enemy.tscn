@@ -19,6 +19,10 @@ height = 36.0
 radius = 14.0
 height = 36.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xxwnf"]
+radius = 17.0
+height = 40.0
+
 [sub_resource type="Animation" id="Animation_41dav"]
 length = 0.001
 tracks/0/type = "value"
@@ -32,6 +36,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_iqb0g"]
+resource_name = "crab_death"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
 }
 
 [sub_resource type="Animation" id="Animation_fuhuh"]
@@ -52,7 +72,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_1f8w3"]
 resource_name = "crab_idle"
-length = 0.2
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -60,7 +80,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10000001, 0.2),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 0]
@@ -68,7 +88,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_xxwnf"]
 resource_name = "crab_walk"
-length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,7 +96,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6, 0.8000001, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [2, 3, 4, 5, 6, 2]
@@ -85,12 +105,15 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iqb0g"]
 _data = {
 &"RESET": SubResource("Animation_41dav"),
+&"crab_death": SubResource("Animation_iqb0g"),
 &"crab_hit": SubResource("Animation_fuhuh"),
 &"crab_idle": SubResource("Animation_1f8w3"),
 &"crab_walk": SubResource("Animation_xxwnf")
 }
 
-[node name="crab_enemy" type="Node2D" unique_id=1515564281]
+[node name="crab_enemy" type="CharacterBody2D" unique_id=954040909]
+z_index = 20
+collision_layer = 4
 script = ExtResource("1_fuhuh")
 stats = SubResource("Resource_xxwnf")
 
@@ -123,11 +146,20 @@ position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_1f8w3")
 debug_color = Color(1, 0, 0, 0.41960785)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=849533731]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_xxwnf")
+debug_color = Color(0, 1, 0, 0.41960785)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1102845484]
 root_node = NodePath("../anchor")
 libraries/ = SubResource("AnimationLibrary_iqb0g")
 
-[node name="Timer" type="Timer" parent="." unique_id=1559857833]
-wait_time = 5.0
+[node name="walk_timer" type="Timer" parent="." unique_id=1559857833]
+wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="idle_timer" type="Timer" parent="." unique_id=2021749084]
+wait_time = 5.0
+one_shot = true

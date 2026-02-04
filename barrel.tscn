@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bp3cthlgen1el"]
+
+[ext_resource type="Texture2D" uid="uid://btj6uk06lgdkc" path="res://sprite_sheets/barrel-enemy01.png" id="1_n8un1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a12vh"]
+radius = 14.0
+height = 36.0
+
+[node name="barrel" type="Node2D" unique_id=1190427390]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1883825729]
+texture = ExtResource("1_n8un1")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1837179938]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1547035559]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_a12vh")

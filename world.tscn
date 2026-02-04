@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://wiwh72pl8p5e" path="res://bird_enemy.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://twekq0ffy7qu" path="res://crab_enemy.tscn" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://chfx2xxexm5kp" path="res://konky_dong.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://bp3cthlgen1el" path="res://barrel.tscn" id="8_gbfbk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
 texture = ExtResource("1_f3sb7")
@@ -109,3 +110,18 @@ position = Vector2(-272, 176)
 
 [node name="konky_dong" parent="." unique_id=896747261 instance=ExtResource("7_pkg7o")]
 position = Vector2(952, 176)
+
+[node name="barrel" parent="." unique_id=1190427390 instance=ExtResource("8_gbfbk")]
+position = Vector2(112, 160)
+
+[node name="barrel4" parent="." unique_id=1380229015 instance=ExtResource("8_gbfbk")]
+position = Vector2(-336, 144)
+
+[node name="barrel5" parent="." unique_id=1987951657 instance=ExtResource("8_gbfbk")]
+position = Vector2(1024, 160)
+
+[node name="barrel3" parent="." unique_id=779695769 instance=ExtResource("8_gbfbk")]
+position = Vector2(592, 160)
+
+[node name="barrel2" parent="." unique_id=675712774 instance=ExtResource("8_gbfbk")]
+position = Vector2(-184, 176)

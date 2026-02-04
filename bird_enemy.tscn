@@ -129,6 +129,7 @@ _data = {
 }
 
 [node name="bird_enemy" type="Node2D" unique_id=613345168]
+z_index = 20
 script = ExtResource("1_og5wd")
 stats = SubResource("Resource_hkuvh")
 

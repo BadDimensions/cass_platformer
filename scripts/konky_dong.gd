@@ -14,6 +14,7 @@ var direction = Vector2.LEFT
 @onready var hurtbox: Hurtbox = $anchor/Hurtbox
 @onready var roar_timer: Timer = $roar_timer
 @onready var attack_timer: Timer = $attack_timer
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @export var acceleration: = 200
 @export var friction = 10000
 @export var stats: Stats:
@@ -59,11 +60,13 @@ func _face_player() -> void:
 	if player == null: return #safety check
 	
 	if player.global_position.x < global_position.x:
+		anchor.scale.x = 1
 		# Player is to the left
-		sprite_2d.flip_h = false
+		#sprite_2d.flip_h = false
 		direction = Vector2.LEFT
 	else:
-		sprite_2d.flip_h = true
+		anchor.scale.x = -1
+		#sprite_2d.flip_h = true
 		direction = Vector2.RIGHT
 
 func change_state(new_state = null):
