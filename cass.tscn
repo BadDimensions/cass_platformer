@@ -254,7 +254,7 @@ _data = {
 &"cass_walltouch": SubResource("Animation_nm70d")
 }
 
-[node name="cass" type="CharacterBody2D" unique_id=849479898]
+[node name="cass" type="CharacterBody2D" unique_id=849479898 groups=["player"]]
 z_index = 50
 collision_layer = 2
 script = ExtResource("1_ji1ou")
