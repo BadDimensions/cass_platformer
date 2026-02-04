@@ -294,9 +294,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqtd7"]
-size = Vector2(66.5, 64)
+size = Vector2(48, 52)
 
 [node name="konky_dong" type="CharacterBody2D" unique_id=1633628473]
+collision_layer = 4
 script = ExtResource("1_qxqpv")
 stats = SubResource("Resource_bgb4t")
 

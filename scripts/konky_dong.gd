@@ -43,10 +43,10 @@ func _ready() -> void:
 			shaker.shake(5, 0.2)
 	)
 	
-	if roar_timer.time_left == 0 and attack_timer.time_left >= 0:
-		state = STATE.ROAR
-	if roar_timer.time_left == 0 and attack_timer.time_left == 0:
-		state = STATE.CHARGE
+	roar_timer.timeout.connect(change_state)
+		
+	attack_timer.timeout.connect(change_state)
+		
 	
 	stats.no_health.connect(queue_free)
 
@@ -54,8 +54,8 @@ func _physics_process(delta: float) -> void:
 	match state:
 		STATE.IDLE:
 			animation_player.play("boss_idle")
-			roar_timer.start()
-			attack_timer.start()
+			roar_timer.start
+			attack_timer.start
 		
 		STATE.ROAR:
 			animation_player.play("boss_roar")
@@ -74,6 +74,10 @@ func _physics_process(delta: float) -> void:
 			
 func change_state(new_state):
 	state = new_state
+	if roar_timer.time_left == 0 and attack_timer.time_left >= 0:
+		STATE.ROAR
+	if roar_timer.time_left == 0 and attack_timer.time_left == 0:
+		STATE.CHARGE
 	print(new_state)				
 	#print(state, STATE)
 func accelerate_horizontally(horizontal_direction: float, delta: float) -> void:
