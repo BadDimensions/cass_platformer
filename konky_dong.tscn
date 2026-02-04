@@ -23,7 +23,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Sprite2D:frame")
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,10 +47,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
+tracks/2/path = NodePath("anchor/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -63,7 +75,7 @@ step = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Sprite2D:frame")
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +87,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -87,7 +99,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
+tracks/2/path = NodePath("anchor/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -96,6 +108,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(32, -40), Vector2(32, -40), Vector2(32, -40), Vector2(32, -40), Vector2(32, -40), Vector2(32, -40)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6, 0.8000001, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(24, -32), Vector2(24, -32), Vector2(24, -32), Vector2(24, -32), Vector2(24, -32), Vector2(24, -32)]
+}
 
 [sub_resource type="Animation" id="Animation_qr7iw"]
 resource_name = "boss_death"
@@ -103,7 +127,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Sprite2D:frame")
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -115,7 +139,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -127,7 +151,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
+tracks/2/path = NodePath("anchor/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -143,7 +167,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Sprite2D:frame")
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -155,7 +179,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -167,7 +191,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
+tracks/2/path = NodePath("anchor/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -185,7 +209,7 @@ step = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Sprite2D:frame")
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -197,7 +221,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -209,7 +233,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
+tracks/2/path = NodePath("anchor/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -225,7 +249,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Sprite2D:frame")
+tracks/0/path = NodePath("anchor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -237,7 +261,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Hitbox/CollisionShape2D:position")
+tracks/1/path = NodePath("anchor/Hitbox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -249,7 +273,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Hurtbox/CollisionShape2D:position")
+tracks/2/path = NodePath("anchor/Hurtbox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -269,47 +293,56 @@ _data = {
 &"boss_roar": SubResource("Animation_rcg58")
 }
 
-[node name="konky_dong" type="Node2D" unique_id=896747261]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqtd7"]
+size = Vector2(66.5, 64)
+
+[node name="konky_dong" type="CharacterBody2D" unique_id=1633628473]
 script = ExtResource("1_qxqpv")
 stats = SubResource("Resource_bgb4t")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1368022120]
+[node name="anchor" type="Node2D" parent="." unique_id=1368022120]
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=2138126756]
+[node name="Sprite2D" type="Sprite2D" parent="anchor" unique_id=2138126756]
 texture_filter = 1
 position = Vector2(16, -32)
 texture = ExtResource("1_uqlkl")
 hframes = 14
 
-[node name="Hitbox" type="Area2D" parent="Node2D" unique_id=145661761]
+[node name="Hitbox" type="Area2D" parent="anchor" unique_id=145661761]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("2_qxqpv")
 metadata/_custom_type_script = "uid://bpmny8xk3jl8h"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hitbox" unique_id=284764930]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor/Hitbox" unique_id=284764930]
 position = Vector2(-8, -32)
 shape = SubResource("CapsuleShape2D_uqlkl")
 
-[node name="Hurtbox" type="Area2D" parent="Node2D" unique_id=740376927]
+[node name="Hurtbox" type="Area2D" parent="anchor" unique_id=740376927]
 position = Vector2(-8, 0)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("3_vqtd7")
 metadata/_custom_type_script = "uid://dgwxyhap62u6g"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hurtbox" unique_id=1094961644]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor/Hurtbox" unique_id=1094961644]
 position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_qxqpv")
 debug_color = Color(0.9764706, 0, 0, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1070190197]
 libraries/ = SubResource("AnimationLibrary_d4uxw")
-speed_scale = 0.2
+speed_scale = 1.399
 
-[node name="idle_timer" type="Timer" parent="." unique_id=381022025]
-wait_time = 20.0
-autostart = true
+[node name="roar_timer" type="Timer" parent="." unique_id=381022025]
+wait_time = 5.0
+one_shot = true
 
 [node name="attack_timer" type="Timer" parent="." unique_id=1288070272]
-wait_time = 30.0
+wait_time = 10.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350316443]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_vqtd7")
+debug_color = Color(0, 1, 0, 0.41960785)

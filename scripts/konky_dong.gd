@@ -1,22 +1,20 @@
-extends Node
+extends CharacterBody2D
 
 enum STATE { IDLE, ROAR, CHARGE }
 
 @export var state: = STATE.IDLE
 
 const speed = 100
-var velocity = 50
-var direction: Vector2:
-	set(value):
-		direction = value.normalized()
+var direction = Vector2.LEFT
 
-@onready var sprite_2d: Sprite2D = $Node2D/Sprite2D
+@onready var sprite_2d: Sprite2D = $anchor/Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var anchor: Node2D = $anchor
 @onready var shaker: = Shaker.new(sprite_2d)
-@onready var hurtbox: Hurtbox = $Node2D/Hurtbox
-@onready var idle_timer: Timer = $idle_timer
+@onready var hurtbox: Hurtbox = $anchor/Hurtbox
+@onready var roar_timer: Timer = $roar_timer
 @onready var attack_timer: Timer = $attack_timer
+@export var acceleration: = 200
 @export var friction = 10000
 @export var stats: Stats:
 	set(value):
@@ -44,21 +42,44 @@ func _ready() -> void:
 			stats.health = newHealth
 			shaker.shake(5, 0.2)
 	)
-
+	
+	if roar_timer.time_left == 0 and attack_timer.time_left >= 0:
+		state = STATE.ROAR
+	if roar_timer.time_left == 0 and attack_timer.time_left == 0:
+		state = STATE.CHARGE
+	
 	stats.no_health.connect(queue_free)
 
 func _physics_process(delta: float) -> void:
 	match state:
 		STATE.IDLE:
 			animation_player.play("boss_idle")
-			idle_timer.start
-			attack_timer.start
-	if idle_timer.time_left == 0 and attack_timer.time_left >0:
-			state = STATE.ROAR
+			roar_timer.start()
+			attack_timer.start()
+		
+		STATE.ROAR:
 			animation_player.play("boss_roar")
 			is_invincible = true
-	if idle_timer.time_left == 0 and attack_timer.time_left == 0:
-			state = STATE.CHARGE
+			
+		
+		STATE.CHARGE:
 			animation_player.play("boss_charge")
-			attack_timer.start
-	print(state, STATE)
+			velocity.x = direction.x * speed
+			move_and_slide()
+			if is_on_wall():
+				direction.x *= -1
+			apply_friction(delta)
+			await animation_player.animation_finished
+			STATE.IDLE
+			
+func change_state(new_state):
+	state = new_state
+	print(new_state)				
+	#print(state, STATE)
+func accelerate_horizontally(horizontal_direction: float, delta: float) -> void:
+	var acceleration_amount = acceleration
+	velocity.x = move_toward(velocity.x, speed * horizontal_direction, acceleration_amount * delta * abs(horizontal_direction))
+
+func apply_friction(delta) -> void:
+	var friction_amount = friction
+	velocity.x = move_toward(velocity.x, 0.0, friction_amount * delta)
