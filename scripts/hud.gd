@@ -5,12 +5,13 @@ signal start_game
 
 func show_message(text): 
 	$Message.text = text
+	$Message.show()
 	$MessageTimer.start()
-
+	
 func show_game_over():
-	show_message("GAME OVER")
+	show_message("Game Over")
 	await $MessageTimer.timeout
-	#this the game over funtion is not working im not sure why
+	
 	$Label.text = "SO BELEZA PURA"
 	$Message.show()
 	await get_tree().create_timer(1.0).timeout
