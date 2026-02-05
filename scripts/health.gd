@@ -18,8 +18,6 @@ func _ready():
 		player.health_changed.connect(_on_health_changed)
 
 func update_health_display(current_health: int):
-	print("current_health is: ", current_health)
-	
 	# frame 0 is full health
 	# Cass at full health = 3
 	# 3 - cass_full_health = 0 (full health frame)
