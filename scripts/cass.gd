@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 enum STATE { MOVE, HIT }
 
+@onready var starting_position: Marker2D = $"../Starting_Position"
 @export var state: = STATE.MOVE
-
 @onready var hurtbox: Hurtbox = $anchor/Hurtbox
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
 @onready var anchor: Node2D = $anchor
@@ -11,10 +11,11 @@ enum STATE { MOVE, HIT }
 @onready var shaker: = Shaker.new(anchor)
 @onready var camera_2d: Camera2D = $Camera2D
 
+const HEALTH = preload("res://health.tscn")
 const wall_jump_pushback = 100
 const wall_slide_gravity = 100
-
-
+signal health_changed(newHealth : float)
+signal no_health
 var is_wall_sliding = false
 var coyote_time = 0
 var wall_normal = get_wall_normal()
@@ -152,3 +153,10 @@ func apply_gravity(delta) -> void:
 			velocity.y += up_gravity * delta
 		else:
 			velocity.y += down_gravity * delta
+
+
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false 

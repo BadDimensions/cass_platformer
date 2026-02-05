@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bsv5oti4pfml7"]
+
+[ext_resource type="Script" uid="uid://b4fb1tiimw1wn" path="res://scripts/health.gd" id="1_bydfv"]
+[ext_resource type="Texture2D" uid="uid://bs72clhox8fg7" path="res://sprite_sheets/health.png" id="1_ledv5"]
+
+[sub_resource type="Animation" id="Animation_bydfv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7e838"]
+resource_name = "health"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m5lkp"]
+_data = {
+&"RESET": SubResource("Animation_bydfv"),
+&"health": SubResource("Animation_7e838")
+}
+
+[node name="PlayerHealth" type="CanvasLayer" unique_id=1782241014]
+script = ExtResource("1_bydfv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=148371683]
+position = Vector2(20, 21)
+scale = Vector2(0.90625, 1)
+texture = ExtResource("1_ledv5")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2098450016]
+libraries/ = SubResource("AnimationLibrary_m5lkp")

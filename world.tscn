@@ -2,7 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bffp3y2vd3m0" path="res://background.tscn" id="1_036b0"]
 [ext_resource type="Texture2D" uid="uid://bpkjago2tog37" path="res://sprite_sheets/tileset01.png" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://ck57p64y6xmro" path="res://scripts/world.gd" id="1_ic0uy"]
 [ext_resource type="PackedScene" uid="uid://c4kb1l50d2qxn" path="res://cass.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://doshnu7dj3dh4" path="res://hud.tscn" id="2_wse8f"]
+[ext_resource type="PackedScene" uid="uid://bsv5oti4pfml7" path="res://health.tscn" id="3_ioo17"]
 [ext_resource type="Script" uid="uid://dvfochld6c1vb" path="res://scripts/leveltilemap.gd" id="4_dwbse"]
 [ext_resource type="PackedScene" uid="uid://wiwh72pl8p5e" path="res://bird_enemy.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://twekq0ffy7qu" path="res://crab_enemy.tscn" id="6_dwbse"]
@@ -87,6 +90,11 @@ sources/0 = SubResource("TileSetAtlasSource_fj7yv")
 
 [node name="world" type="Node2D" unique_id=14598685]
 position = Vector2(120, -40)
+script = ExtResource("1_ic0uy")
+
+[node name="PlayerHealth" parent="." unique_id=1782241014 instance=ExtResource("3_ioo17")]
+
+[node name="hud" parent="." unique_id=67186710 instance=ExtResource("2_wse8f")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1682166673]
 z_index = 1
@@ -125,3 +133,15 @@ position = Vector2(592, 160)
 
 [node name="barrel2" parent="." unique_id=675712774 instance=ExtResource("8_gbfbk")]
 position = Vector2(-184, 176)
+
+[node name="Start_Timer" type="Timer" parent="." unique_id=175916755]
+wait_time = 2.0
+one_shot = true
+
+[node name="Starting_Position" type="Marker2D" parent="." unique_id=481146780]
+position = Vector2(-40, 176)
+
+[connection signal="start_game" from="hud" to="." method="new_game"]
+[connection signal="health_changed" from="cass" to="PlayerHealth" method="_on_cass_health_changed"]
+[connection signal="no_health" from="cass" to="." method="game_over"]
+[connection signal="timeout" from="Start_Timer" to="." method="_on_start_timer_timeout"]
