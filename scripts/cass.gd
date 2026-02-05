@@ -14,7 +14,7 @@ enum STATE { MOVE, HIT }
 const HEALTH = preload("res://health.tscn")
 const wall_jump_pushback = 100
 const wall_slide_gravity = 100
-signal health_changed(newHealth : float)
+signal health_changed(newHealth : int)
 signal no_health
 var is_wall_sliding = false
 var coyote_time = 0
@@ -50,12 +50,18 @@ func _ready() -> void:
 		var newHealth = stats.health - other_hitbox.damage
 		if newHealth <= 0:
 			animation_player.play("cass_death")
+			
+			# emit the signal so health bar deducts
+			# doing this before the death animation completes, so it feels more snappy
+			health_changed.emit(newHealth)
 			await animation_player.animation_finished
 			stats.health = newHealth
 		else:
 			animation_player.play("cass_hit")
 			await animation_player.animation_finished
 			stats.health = newHealth
+			# emit the signal so health bar deducts
+			health_changed.emit(stats.health)
 			#jump(jump_amount/2)
 			shaker.shake(10,0.3)
 	)
