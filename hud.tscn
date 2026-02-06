@@ -20,7 +20,7 @@ process_mode = 2
 position = Vector2(159, 101)
 texture = ExtResource("2_8sq4i")
 
-[node name="Label" type="Label" parent="." unique_id=905634127]
+[node name="GameOver" type="Label" parent="." unique_id=905634127]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -33,6 +33,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
 autowrap_mode = 2
 
 [node name="StartButton" type="Button" parent="." unique_id=415010893]
@@ -55,4 +56,3 @@ wait_time = 2.0
 one_shot = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

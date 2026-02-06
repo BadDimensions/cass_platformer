@@ -157,6 +157,7 @@ shape = SubResource("WorldBoundaryShape2D_ic0uy")
 position = Vector2(1050, 40)
 shape = SubResource("WorldBoundaryShape2D_k3n1d")
 
+[connection signal="game_over" from="hud" to="." method="game_over"]
 [connection signal="start_game" from="hud" to="." method="new_game"]
 [connection signal="health_changed" from="cass" to="PlayerHealth" method="_on_cass_health_changed"]
 [connection signal="no_health" from="cass" to="." method="game_over"]
