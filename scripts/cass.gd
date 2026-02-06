@@ -5,6 +5,7 @@ enum STATE { MOVE, HIT }
 @onready var starting_position: Marker2D = $"../Starting_Position"
 @export var state: = STATE.MOVE
 @export var jump_cut_multiplier: float = 0.3
+const Hud = preload("uid://cu5kfq2nbg6np")
 
 @onready var hurtbox: Hurtbox = $anchor/Hurtbox
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
@@ -23,6 +24,8 @@ var coyote_time = 0
 var wall_normal = get_wall_normal()
 
 @export var knockback_amount: int = 500
+@export var hitbox_pos: Vector2
+@export var player_pos: Vector2
 @export var is_invincible = false
 @export var stats: Stats
 @export var max_speed = 100
@@ -34,10 +37,20 @@ var wall_normal = get_wall_normal()
 @export var down_gravity = 600
 @export var jump_amount = 700
 
+
+
 func _ready() -> void:
+	
+	if Input.is_action_just_pressed("StartButton"):
+		get_tree().paused = false
+		
+	if not Input.is_action_pressed("StartButton"):
+		await get_tree().create_timer(0.1).timeout
+		get_tree().paused = true
+	#this makes it so cass cant do anything until the game starts
+	#the await timer solved an issue where she moved a little everytime you
+	#press the start button
 	stats.no_health.connect(queue_free)
-	
-	
 	#camera_2d.reparent(get_tree().current_scene)
 
 	# Return to MOVE state when hit animation finishes
@@ -75,7 +88,7 @@ func _physics_process(delta:float) -> void:
 	match state:
 		STATE.MOVE:
 			coyote_time -= delta
-
+			
 			var x_input = Input.get_axis("move_left", "move_right")
 
 			apply_gravity(delta)
@@ -136,8 +149,10 @@ func _physics_process(delta:float) -> void:
 			move_and_slide()
 			apply_friction(delta)
 			apply_gravity(delta)
-			
-
+	
+	
+	if get_tree().paused: #i dont know if this does anything
+		return
 func jump() -> void:
 		if is_on_floor() or is_on_wall():
 			velocity.y = -jump_amount
@@ -179,10 +194,13 @@ func apply_gravity(delta) -> void:
 			velocity.y += down_gravity * delta
 func knockback():
 	var knockback_direction = -velocity.normalized() * knockback_amount
+	var direction = hitbox_pos.direction_to(player_pos)
 	velocity = knockback_direction
 	move_and_slide()
 #attempted to implement knockback to solve the issue of so cass would jump
 #back when you take a hit so ydon immetdielty take another
+
+	
 func start(pos):
 	position = pos
 	show()

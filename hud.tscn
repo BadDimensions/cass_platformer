@@ -12,9 +12,11 @@ pressed = true
 events = [SubResource("InputEventAction_64ctp"), null]
 
 [node name="hud" type="CanvasLayer" unique_id=67186710]
+process_mode = 3
 script = ExtResource("1_37p78")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=84460436]
+process_mode = 2
 position = Vector2(159, 101)
 texture = ExtResource("2_8sq4i")
 

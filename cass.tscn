@@ -291,6 +291,7 @@ _data = {
 }
 
 [node name="cass" type="CharacterBody2D" unique_id=849479898 groups=["player"]]
+process_mode = 1
 z_index = 50
 collision_layer = 2
 script = ExtResource("1_ji1ou")
