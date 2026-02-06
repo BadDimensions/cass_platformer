@@ -334,7 +334,6 @@ libraries/ = SubResource("AnimationLibrary_jq8yw")
 autoplay = &"RESET"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=993296640]
-limit_top = -160
 script = ExtResource("5_f3k1y")
 
 [connection signal="health_changed" from="." to="." method="_on_health_changed"]

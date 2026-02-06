@@ -3,11 +3,11 @@ extends CanvasLayer
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-var frame: Array = [ 
-	"frame_0", # full health
+var frame: Array = [
+	"frame_0", #full health
 	"frame_1",
-	"frame_2", 
-	"frame_3" # empty health
+	"frame_2",
+	"frame_3"  #no health
 ]
 
 func _ready():
@@ -22,7 +22,6 @@ func update_health_display(current_health: int):
 	# Cass at full health = 3
 	# 3 - cass_full_health = 0 (full health frame)
 	sprite_2d.frame = 3 - current_health
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass

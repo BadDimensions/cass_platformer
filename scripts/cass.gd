@@ -20,6 +20,8 @@ var is_wall_sliding = false
 var coyote_time = 0
 var wall_normal = get_wall_normal()
 
+@export var knockback_amount: int = 500
+@export var is_invincible = false
 @export var stats: Stats
 @export var max_speed = 100
 @export var acceleration = 200
@@ -62,6 +64,7 @@ func _ready() -> void:
 			stats.health = newHealth
 			# emit the signal so health bar deducts
 			health_changed.emit(stats.health)
+			knockback() #dont know if knockback needs to be here
 			#jump(jump_amount/2)
 			shaker.shake(10,0.3)
 	)
@@ -115,10 +118,19 @@ func _physics_process(delta:float) -> void:
 				coyote_time = 0.1
 
 		STATE.HIT:
+			is_invincible = true
+			#the player needs to be invincible in the hit state so you cant
+			#take another hit immediately
+			if stats.health > 0:
+				knockback()
+			#tried to put arguments in this like other hitbox but that isnt declared
+			#in physics process so it was breaking the code. the player will knocback
+			#but barely and it shakes the camera horrbily and its inconsistent.
+			#also when you die the knockback effect plays forever
 			move_and_slide()
 			apply_friction(delta)
 			apply_gravity(delta)
-
+			
 
 func jump() -> void:
 		if is_on_floor() or is_on_wall():
@@ -159,9 +171,12 @@ func apply_gravity(delta) -> void:
 			velocity.y += up_gravity * delta
 		else:
 			velocity.y += down_gravity * delta
-
-
-
+func knockback():
+	var knockback_direction = -velocity.normalized() * knockback_amount
+	velocity = knockback_direction
+	move_and_slide()
+#attempted to implement knockback to solve the issue of so cass would jump
+#back when you take a hit so ydon immetdielty take another
 func start(pos):
 	position = pos
 	show()

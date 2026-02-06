@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 func show_message(text): 
@@ -12,13 +13,13 @@ func show_game_over():
 	show_message("Game Over")
 	await $MessageTimer.timeout
 	
-	$Label.text = "SO BELEZA PURA"
-	$Message.show()
+	
+	$Sprite2D.show()
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 	
 func _on_start_button_pressed():
-	$Label.hide()
+	$Sprite2D.hide()
 	$StartButton.hide()
 	start_game.emit()
 	#cass can still move while the menu is up you dont have to start the game to
