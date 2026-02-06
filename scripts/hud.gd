@@ -2,17 +2,14 @@ extends CanvasLayer
 
 signal start_game
 signal game_over
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 func init():
 	get_tree().paused = true
 	$Sprite2D.show()
 	$StartButton.show()
-
-#func show_message(text): 
-	#$Message.text = text
-	#$Message.show()
-	#$MessageTimer.start()
+	$GameOver.hide()
 	
 func show_game_over():
 	get_tree().paused = true
@@ -23,8 +20,8 @@ func show_game_over():
 
 func _on_game_start():
 	get_tree().paused = false
-	show()	
-
+	$Sprite2D.show()	
+	$GameOver.hide()
 func _on_start_button_pressed():
 	$Sprite2D.hide()
 	$StartButton.hide()
