@@ -4,6 +4,8 @@ enum STATE { MOVE, HIT }
 
 @onready var starting_position: Marker2D = $"../Starting_Position"
 @export var state: = STATE.MOVE
+@export var jump_cut_multiplier: float = 0.3
+
 @onready var hurtbox: Hurtbox = $anchor/Hurtbox
 @onready var sprite_2d: Sprite2D = $anchor/Sprite2D
 @onready var anchor: Node2D = $anchor
@@ -85,6 +87,10 @@ func _physics_process(delta:float) -> void:
 			if Input.is_action_just_pressed("jump") and is_on_wall():
 				jump()
 			if Input.is_action_just_pressed("move_up"): jump()
+
+			# how we implement "jump cut"
+			if Input.is_action_just_released("jump") and velocity.y < 0:
+				velocity.y *= jump_cut_multiplier
 
 			if x_input == 0:
 				apply_friction(delta)
