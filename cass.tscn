@@ -9,6 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_nd1go"]
 script = ExtResource("2_f3k1y")
+max_health = 3
 health = 3
 metadata/_custom_type_script = "uid://77ruu5yxqkrw"
 

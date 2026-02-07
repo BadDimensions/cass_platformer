@@ -76,7 +76,6 @@ func change_state(new_state = null):
 			is_invincible = false
 
 	state = new_state
-	print("changing to state: ", STATE.keys()[new_state])
 
 	match state:
 		STATE.IDLE:

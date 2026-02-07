@@ -50,7 +50,7 @@ func _ready() -> void:
 	#this makes it so cass cant do anything until the game starts
 	#the await timer solved an issue where she moved a little everytime you
 	#press the start button
-	stats.no_health.connect(queue_free)
+	
 	#camera_2d.reparent(get_tree().current_scene)
 
 	# Return to MOVE state when hit animation finishes
@@ -73,6 +73,8 @@ func _ready() -> void:
 			health_changed.emit(newHealth)
 			await animation_player.animation_finished
 			stats.health = newHealth
+			# emit no_health signal
+			no_health.emit()
 		else:
 			animation_player.play("cass_hit")
 			await animation_player.animation_finished
@@ -204,4 +206,8 @@ func knockback():
 func start(pos):
 	position = pos
 	show()
-	$CollisionShape2D.disabled = false 
+	$CollisionShape2D.disabled = false
+	stats.health = stats.max_health
+	health_changed.emit(stats.health)
+	state = STATE.MOVE
+	velocity = Vector2.ZERO

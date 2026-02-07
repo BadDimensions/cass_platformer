@@ -2,9 +2,11 @@ extends Node
 
 
 func _ready() -> void:
+	$cass.no_health.connect(game_over)
 	pass 
 
 func game_over():
+	print("game over called")
 	$hud.show_game_over()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
