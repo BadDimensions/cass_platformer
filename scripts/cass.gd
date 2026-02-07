@@ -23,7 +23,7 @@ var is_wall_sliding = false
 var coyote_time = 0
 var wall_normal = get_wall_normal()
 
-@export var knockback_amount: int = 500
+@export var knockback_amount: int = 100
 @export var hitbox_pos: Vector2
 @export var player_pos: Vector2
 @export var is_invincible = false
@@ -60,9 +60,12 @@ func _ready() -> void:
 	)
 
 	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
-		var x_direction = sign(other_hitbox.global_position.direction_to(global_position).x)
+		
+		var x_direction: float = sign(other_hitbox.global_position.direction_to(global_position).x)
 		if x_direction == 0 : x_direction = -1
-		velocity.x = x_direction * max_speed
+
+		knockback(x_direction)
+		
 		state = STATE.HIT
 		var newHealth = stats.health - other_hitbox.damage
 		if newHealth <= 0:
@@ -81,9 +84,9 @@ func _ready() -> void:
 			stats.health = newHealth
 			# emit the signal so health bar deducts
 			health_changed.emit(stats.health)
-			knockback() #dont know if knockback needs to be here
+			
 			#jump(jump_amount/2)
-			shaker.shake(10,0.3)
+			# shaker.shake(10,0.3)
 	)
 
 func _physics_process(delta:float) -> void:
@@ -140,14 +143,6 @@ func _physics_process(delta:float) -> void:
 
 		STATE.HIT:
 			is_invincible = true
-			#the player needs to be invincible in the hit state so you cant
-			#take another hit immediately
-			if stats.health > 0:
-				knockback()
-			#tried to put arguments in this like other hitbox but that isnt declared
-			#in physics process so it was breaking the code. the player will knocback
-			#but barely and it shakes the camera horrbily and its inconsistent.
-			#also when you die the knockback effect plays forever
 			move_and_slide()
 			apply_friction(delta)
 			apply_gravity(delta)
@@ -165,7 +160,7 @@ func jump() -> void:
 			velocity.y = -jump_amount
 			velocity.x = wall_jump_pushback
 
-func wall_slide(delta):
+func wall_slide(delta: float):
 	if is_on_wall_only() and not Input.is_action_pressed("jump"):
 		if Input.get_axis("move_left", "move_right"):
 			is_wall_sliding = true
@@ -183,7 +178,7 @@ func accelerate_horizontally(horizontal_direction: float, delta: float) -> void:
 	if not is_on_floor(): acceleration_amount = air_acceleration
 	velocity.x = move_toward(velocity.x, max_speed * horizontal_direction, acceleration_amount * delta * abs(horizontal_direction))
 
-func apply_friction(delta) -> void:
+func apply_friction(delta: float) -> void:
 	var friction_amount = friction
 	if not is_on_floor(): friction_amount = air_friction
 	velocity.x = move_toward(velocity.x, 0.0, friction_amount * delta)
@@ -194,16 +189,14 @@ func apply_gravity(delta) -> void:
 			velocity.y += up_gravity * delta
 		else:
 			velocity.y += down_gravity * delta
-func knockback():
-	var knockback_direction = -velocity.normalized() * knockback_amount
-	var direction = hitbox_pos.direction_to(player_pos)
-	velocity = knockback_direction
-	move_and_slide()
-#attempted to implement knockback to solve the issue of so cass would jump
-#back when you take a hit so ydon immetdielty take another
 
+## Applies knockback to the player
+## direction: The horizontal direction to knock back (-1.0 for left, 1.0 for right)
+func knockback(direction: float) -> void:
+	velocity.x = direction * knockback_amount
+	velocity.y = -knockback_amount * 0.5 # adds some upwards to knockback too
 	
-func start(pos):
+func start(pos: Vector2) -> void:
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
