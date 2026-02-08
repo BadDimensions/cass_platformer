@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://twekq0ffy7qu" path="res://crab_enemy.tscn" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://chfx2xxexm5kp" path="res://konky_dong.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://bp3cthlgen1el" path="res://barrel.tscn" id="8_gbfbk"]
+[ext_resource type="AudioStream" uid="uid://c72cyhwo022p4" path="res://music-sounds/cass_beach_theme.wav" id="12_k3n1d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
 texture = ExtResource("1_f3sb7")
@@ -156,6 +157,9 @@ shape = SubResource("WorldBoundaryShape2D_ic0uy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=824910633]
 position = Vector2(1050, 40)
 shape = SubResource("WorldBoundaryShape2D_k3n1d")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1505526827]
+stream = ExtResource("12_k3n1d")
 
 [connection signal="game_over" from="hud" to="." method="game_over"]
 [connection signal="start_game" from="hud" to="." method="new_game"]

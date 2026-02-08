@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cu5kfq2nbg6np" path="res://scripts/hud.gd" id="1_37p78"]
 [ext_resource type="Texture2D" uid="uid://ykbma88eskso" path="res://sprite_sheets/title.png" id="2_8sq4i"]
-[ext_resource type="Texture2D" uid="uid://bglpwwoso1di5" path="res://sprite_sheets/start_button.png" id="2_64ctp"]
+[ext_resource type="Texture2D" uid="uid://celyn50pb7rve" path="res://sprite_sheets/start_button.png" id="2_64ctp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8sq4i"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_64ctp"]
 action = &"StartButton"
@@ -34,6 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "GAME OVER"
+label_settings = SubResource("LabelSettings_8sq4i")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

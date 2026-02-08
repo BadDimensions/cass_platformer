@@ -4,6 +4,7 @@ signal start_game
 signal game_over
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var starting_position: Marker2D = $"../Starting_Position"
 
 func _ready():
 	get_tree().paused = true

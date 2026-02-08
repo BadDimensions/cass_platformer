@@ -8,11 +8,12 @@ func _ready() -> void:
 func game_over():
 	print("game over called")
 	$hud.show_game_over()
-
+	$Music.stop()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func new_game():
 	$Start_Timer.start()
 	$cass.start($Starting_Position.position)
+	$Music.play()
 	pass
 
 

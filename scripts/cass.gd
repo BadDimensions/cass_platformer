@@ -40,12 +40,12 @@ var wall_normal = get_wall_normal()
 
 
 func _ready() -> void:
-	
 	if Input.is_action_just_pressed("StartButton"):
+		await get_tree().create_timer(0.1).timeout
 		get_tree().paused = false
 		
 	if not Input.is_action_pressed("StartButton"):
-		await get_tree().create_timer(0.1).timeout
+		#await get_tree().create_timer(0.1).timeout
 		get_tree().paused = true
 	#this makes it so cass cant do anything until the game starts
 	#the await timer solved an issue where she moved a little everytime you
@@ -76,7 +76,7 @@ func _ready() -> void:
 			health_changed.emit(newHealth)
 			await animation_player.animation_finished
 			stats.health = newHealth
-			# emit no_health signal
+			#queue_free()
 			no_health.emit()
 		else:
 			animation_player.play("cass_hit")
@@ -84,8 +84,6 @@ func _ready() -> void:
 			stats.health = newHealth
 			# emit the signal so health bar deducts
 			health_changed.emit(stats.health)
-			
-			#jump(jump_amount/2)
 			# shaker.shake(10,0.3)
 	)
 
@@ -146,10 +144,10 @@ func _physics_process(delta:float) -> void:
 			move_and_slide()
 			apply_friction(delta)
 			apply_gravity(delta)
-	
-	
-	if get_tree().paused: #i dont know if this does anything
+
+	if get_tree().paused:
 		return
+
 func jump() -> void:
 		if is_on_floor() or is_on_wall():
 			velocity.y = -jump_amount
