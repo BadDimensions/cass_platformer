@@ -9,6 +9,7 @@ func game_over():
 	print("game over called")
 	$hud.show_game_over()
 	$Music.stop()
+	$GameOver.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func new_game():
 	$Start_Timer.start()
